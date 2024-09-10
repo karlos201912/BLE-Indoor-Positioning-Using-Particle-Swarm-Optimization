@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="googlecode.jfreesane" type="repository">
+    <properties maven-id="com.googlecode.jfreesane:jfreesane:1.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/jfreesane/jfreesane/1.0/jfreesane-1.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/errorprone/error_prone_annotations/2.4.0/error_prone_annotations-2.4.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

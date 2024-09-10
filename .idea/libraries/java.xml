@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="java">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-benchmarks/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-core/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-core/src/test-integration/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-core/src/test/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-operators/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-optimizers/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-optimizers/src/test/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-satdecoding/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-satdecoding/src/test/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-tutorial/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../opt4j/opt4j-viewer/src/main/java" />
+    </SOURCES>
+  </library>
+</component>
