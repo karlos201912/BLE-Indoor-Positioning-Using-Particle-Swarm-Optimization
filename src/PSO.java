@@ -10,6 +10,10 @@ public class PSO {
     private Random random;
     private int optimizedBeacons;
     private int patience;
+    private double nMin = 2.0;
+    private double nMax = 4.0;
+    private double rssi0Min = -100;
+    private double rssi0Max = -30;
 
     // Personal best and global best storage
     private double[][] pBestPositions;
@@ -44,11 +48,17 @@ public class PSO {
             swarm[i][1] = random.nextDouble() * mapSize; // y
             swarm[i][2] = random.nextDouble() * 2 + 2;  // n (path loss exponent)
             for (int j = 3; j < optimizedBeacons + 3; j++) {
-                swarm[i][j] = -40 + random.nextDouble() * 20 - 10; // RSSI0 for each beacon
+                swarm[i][j] = -50 + random.nextDouble() * 10 - 5; // RSSI0 for each beacon
             }
             // Random initial velocities
             for (int j = 0; j < optimizedBeacons + 3; j++) {
-                velocities[i][j] = random.nextDouble() * 2 - 1;  // Random velocities between -1 and 1
+                if (j < 2) {
+                    velocities[i][j] = random.nextDouble() * mapSize - 0.5 * mapSize; // Random velocities between -1 and 1
+                }  else if (j == 2) {
+                    velocities[i][j] = random.nextDouble() * (nMax - nMin) - 0.5 *  (nMax - nMin);
+                }else {
+                    velocities[i][j] = random.nextDouble() * (rssi0Max - rssi0Min) - 0.5 * (rssi0Max - rssi0Min);
+                }
             }
         }
 
@@ -107,7 +117,13 @@ public class PSO {
                     // Ensure positions stay within the map bounds (for x, y positions)
                     if (j < 2) { // Only x and y positions need to stay in the map
                         swarm[i][j] = Math.max(0, Math.min(swarm[i][j], mapSize));  // Bound x and y within map size
+                    } else if (j == 2) {
+                        swarm[i][j] = Math.max(nMin, Math.min(swarm[i][j], nMax));
+                    } else {
+                        swarm[i][j] = Math.max(rssi0Min, Math.min(swarm[i][j], rssi0Max));
                     }
+
+
                 }
             }
 

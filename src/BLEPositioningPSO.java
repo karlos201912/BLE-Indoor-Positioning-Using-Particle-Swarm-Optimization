@@ -7,7 +7,7 @@ public class BLEPositioningPSO {
     private static final int NUM_BEACONS = 5;
     private static final int SWARM_SIZE = 100;
     private static final int MAX_ITERATIONS = 2000;
-    private static final double FUNCTION_TOLERANCE = 1e-8;
+    private static final double FUNCTION_TOLERANCE = 1e-10;
     private static int OPTIMIZED_BEACONS = 1;
     private static int PATIENCE = 100;
 
@@ -20,7 +20,8 @@ public class BLEPositioningPSO {
 
         // Set true path loss exponent and RSSI at 1 meter
         Random random = new Random();
-        double trueN = 2.5 + random.nextDouble() * 1 - 0.5;
+//        double trueN = 2.5 + random.nextDouble() * 1 - 0.5;
+        double[] trueN = generateTrueN(NUM_BEACONS);
         double[] trueRSSI0 = generateTrueRSSI0(NUM_BEACONS);
 
         // Simulate RSSI measurements
@@ -82,9 +83,18 @@ public class BLEPositioningPSO {
         Random random = new Random();
         double[] rssi0 = new double[numBeacons];
         for (int i = 0; i < numBeacons; i++) {
-            rssi0[i] = -40 + random.nextDouble() * 2 - 1;
+            rssi0[i] = -40 + random.nextDouble() * 5 - 2.5;
         }
         return rssi0;
+    }
+
+    public static double[] generateTrueN(int numBeacons) {
+        Random random = new Random();
+        double [] true_N = new double[numBeacons];
+        for (int i = 0; i < numBeacons; i++){
+            true_N[i] = 2.5 + random.nextDouble() * 0.5 - 0.25;
+        }
+        return true_N;
     }
 
     // Calculate Euclidean distances between the smartphone and beacons
@@ -98,10 +108,10 @@ public class BLEPositioningPSO {
     }
 
     // RSSI function based on log-distance path loss model
-    public static double[] simulateRSSIMeasurements(double[] distances, double[] rssi0, double n) {
+    public static double[] simulateRSSIMeasurements(double[] distances, double[] rssi0, double[] n) {
         double[] rssiMeasurements = new double[distances.length];
         for (int i = 0; i < distances.length; i++) {
-            rssiMeasurements[i] = rssi0[i] - 10 * n * Math.log10(distances[i] + 1e-9);
+            rssiMeasurements[i] = rssi0[i] - 10 * n[i] * Math.log10(distances[i] + 1e-9);
         }
         return rssiMeasurements;
     }
