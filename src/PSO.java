@@ -48,7 +48,7 @@ public class PSO {
             swarm[i][1] = random.nextDouble() * mapSize; // y
             swarm[i][2] = random.nextDouble() * 2 + 2;  // n (path loss exponent)
             for (int j = 3; j < optimizedBeacons + 3; j++) {
-                swarm[i][j] = -50 + random.nextDouble() * 10 - 5; // RSSI0 for each beacon
+                swarm[i][j] = -50 + (random.nextDouble() * 10 - 5); // RSSI0 for each beacon
             }
             // Random initial velocities
             for (int j = 0; j < optimizedBeacons + 3; j++) {
@@ -155,7 +155,26 @@ public class PSO {
             } else {
                 estimatedRSSI = params[3 + i] - 10 * params[2] * Math.log10(distances[i] + 1e-9);
             }
-            error += Math.pow(rssiMeasurements[i] - estimatedRSSI, 2);
+//            error += Math.pow(rssiMeasurements[i] - estimatedRSSI, 2);
+            error += Math.abs(rssiMeasurements[i] - estimatedRSSI);
+        }
+        return error;
+    }
+
+    public double evaluateFitnessDistance(double[] params, double[][] beaconPositions, double[] rssiMeasurements) {
+        double error = 0.0;
+        double[] distances = BLEPositioningPSO.calculateDistances(beaconPositions, new double[]{params[0], params[1]});
+        double estimatedDistance;
+        for (int i = 0; i < rssiMeasurements.length; i++) {
+            if (optimizedBeacons == 1) {
+                estimatedDistance = Math.pow(10, (rssiMeasurements[i] - params[3]) / (-10 * params[2]));
+            } else {
+                estimatedDistance = Math.pow(10, (rssiMeasurements[i] - params[3 + i]) / (-10 * params[2])); // multiple rssi0 considered
+            }
+            // mae
+            error += Math.abs(distances[i] - estimatedDistance);
+            // mse
+            error += Math.pow(distances[i] - estimatedDistance, 2);
         }
         return error;
     }

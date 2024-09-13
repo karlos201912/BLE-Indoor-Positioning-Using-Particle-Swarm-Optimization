@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class BLEPositioningPSO {
     private static final int MAP_SIZE = 30;
     private static final int NUM_BEACONS = 5;
-    private static final int SWARM_SIZE = 100;
+    private static final int SWARM_SIZE = 200;
     private static final int MAX_ITERATIONS = 2000;
     private static final double FUNCTION_TOLERANCE = 1e-10;
     private static int OPTIMIZED_BEACONS = 1;
@@ -46,7 +46,7 @@ public class BLEPositioningPSO {
         System.out.println("Estimated Smartphone Position: " + Arrays.toString(estimatedPosition));
         System.out.println("True RSSI_0: " + Arrays.toString(trueRSSI0));
         System.out.println("Estimated RSSI_0: " + Arrays.toString(estimatedRSSI0));
-        System.out.println("True n: " + trueN);
+        System.out.println("True n: " + Arrays.toString(trueN));
         System.out.println("Estimated n: " + estimatedN);
         System.out.println("Operation error: " + distance_error);
 
@@ -83,7 +83,7 @@ public class BLEPositioningPSO {
         Random random = new Random();
         double[] rssi0 = new double[numBeacons];
         for (int i = 0; i < numBeacons; i++) {
-            rssi0[i] = -40 + random.nextDouble() * 5 - 2.5;
+            rssi0[i] = -40 + 0 * (random.nextDouble() * 5 - 2.5);
         }
         return rssi0;
     }
@@ -92,7 +92,7 @@ public class BLEPositioningPSO {
         Random random = new Random();
         double [] true_N = new double[numBeacons];
         for (int i = 0; i < numBeacons; i++){
-            true_N[i] = 2.5 + random.nextDouble() * 0.5 - 0.25;
+            true_N[i] = 2.5 + 0 * (random.nextDouble() * 0.5 - 0.25);
         }
         return true_N;
     }
