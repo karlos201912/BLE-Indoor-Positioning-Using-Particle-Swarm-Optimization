@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class BLEPositioningPSO {
     private static final int MAP_SIZE = 30;
-    private static final int NUM_BEACONS = 5;
+    private static final int NUM_BEACONS = 8;
     private static final int SWARM_SIZE = 200;
     private static final int MAX_ITERATIONS = 2000;
     private static final double FUNCTION_TOLERANCE = 1e-10;
@@ -69,6 +69,9 @@ public class BLEPositioningPSO {
         positions[2] = new double[]{mapSize, mapSize};
         positions[3] = new double[]{mapSize, 0};
         positions[4] = new double[]{mapSize / 2, mapSize / 2};
+        positions[5] = new double[]{mapSize / 2, 0};
+        positions[6] = new double[]{mapSize / 2, mapSize};
+        positions[7] = new double[]{mapSize, mapSize / 2};
         return positions;
     }
 
