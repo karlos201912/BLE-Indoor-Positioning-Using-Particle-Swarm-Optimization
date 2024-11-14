@@ -6,7 +6,7 @@ This project demonstrates the use of **Particle Swarm Optimization (PSO)** to es
 
 - **BLE Beacon Simulation**: Beacons are distributed around the edges of a 30x30 map.
 - **Smartphone Position Estimation**: The position of the smartphone is randomly generated on the map.
-- **RSSI-based Distance Estimation**: The distance between the smartphone and beacons is estimated using a log-distance path loss model.
+- **RSSI-based Distance Estimation**: The distance between the smartphone and beacons is estimated using a log-distance path loss model without the need to assume the model parameters.
 - **PSO Algorithm**: Particle Swarm Optimization is used to estimate the smartphone's position and optimize the model parameters (rssi0 and N) at the same time.
 - **Visualization**: A graphical visualization of the true smartphone position, estimated position, and beacons.
 
